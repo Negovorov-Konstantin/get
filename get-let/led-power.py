@@ -6,8 +6,7 @@ GI.setmode(GI.BCM)
 GI.setwarnings(False)
 
 led=23
-button=13
-shutdown=10
+shutdown=13
 period=3
 shim=10**-2
 light=0
@@ -15,7 +14,6 @@ maxlight=1
 disp=100
 
 GI.setup(led, GI.OUT)
-GI.setup(button, GI.IN)
 GI.setup(shutdown, GI.IN)
 state=0
 time1=t.time()
@@ -31,7 +29,7 @@ while not(GI.input(shutdown)):
         state=1
         timeshim=t.time()
     
-    if t.time()-timeshim>shim*light:
+    if t.time()-timeshim>shim*light**2:
         state=0
     
     GI.output(led, state)

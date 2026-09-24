@@ -11,8 +11,7 @@ period=0.2
 on=[0]*8
 up=9
 down=10
-work=2
-GI.setup(work, GI.OUT)
+
 GI.setup(led, GI.OUT)
 GI.setup([up, down], GI.IN)
 GI.setup(shutdown, GI.IN)
@@ -22,28 +21,29 @@ timeshim=t.time()
 num=0
 
 
-GI.output(work, 1)
+
 while not(GI.input(shutdown)):
-    if t.time()-time1>period and not state:
+
+
+    if t.time()-time1>period and GI.input(down) and GI.input(up):
+        num=4
+        time1=t.time()
+    if t.time()-time1>period and GI.input(up):
         time1=t.time()
         num+=1
-        if num>6:
-            state=1
-        on=[0]*8
-        on[num]=1
-
-    if t.time()-time1>period and state:
-        time1=t.time()
+    if t.time()-time1>period and GI.input(down):
         num-=1
-        if num<1:
-            state=0
-        on=[0]*8
-        on[num]=1
+        time1=t.time()
+
+
+
 
     
-
+    
+    on=[0]*8
+    on[num]=1
     for i in range(8):
         GI.output(led[i], on[i])
     
-GI.output(work, 0)
+
 GI.output(led, 0)
