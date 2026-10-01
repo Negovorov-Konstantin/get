@@ -3,7 +3,7 @@ import signal_generator as sg
 import time
 
 amplitude = 3.183
-signal_frequency = 10
+signal_frequency = 20
 sampling_frequency = 1000
 
 
