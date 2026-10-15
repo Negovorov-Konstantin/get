@@ -1,10 +1,10 @@
 import pwm_dac as pwm
 import signal_generator as sg
 import time
-
 amplitude = 3.290
-signal_frequency = 100
+signal_frequency = 1
 sampling_frequency = 1000
+
 
 
 try:
@@ -13,6 +13,6 @@ try:
     while True:
         dac.set_voltage(amplitude * sg.get_sin_wave_amplitude(signal_frequency, time.time()))
         sg.wait_for_sampling_period(sampling_frequency)
-
+        
 finally:
     dac.deinit()
